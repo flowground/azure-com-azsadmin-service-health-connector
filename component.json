@@ -1,0 +1,84 @@
+{
+    "title": "InfrastructureInsightsManagementClient",
+    "description": "Resource provider health operation endpoints and objects.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/azsadmin-ServiceHealth/2016-05-01/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://adminmanagement.local.azurestack.external/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Authorization uses an Azure Active Directory OAuth2 flow.",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "ServiceHealths_List": {
+            "main": "./lib/actions/ServiceHealths_List.js",
+            "title": "Returns the list of all resource provider health states.",
+            "description": "Returns the list of all resource provider health states.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ServiceHealths_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ServiceHealths_Get": {
+            "main": "./lib/actions/ServiceHealths_Get.js",
+            "title": "Returns the requested service health object.",
+            "description": "Returns the requested service health object.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ServiceHealths_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
